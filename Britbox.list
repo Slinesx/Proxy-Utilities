@@ -2,6 +2,7 @@
 USER-AGENT,BritBox*
 USER-AGENT,*britbox*
 DOMAIN-SUFFIX,britbox.com
+DOMAIN-SUFFIX,britbox.co.uk
 DOMAIN-SUFFIX,bbc.co.uk
 DOMAIN-SUFFIX,bb-static.com
 DOMAIN-SUFFIX,appsflyer.com
