@@ -1,0 +1,12 @@
+# > Britbox
+USER-AGENT,BritBox*
+USER-AGENT,*britbox*
+DOMAIN-SUFFIX,britbox.com
+DOMAIN-SUFFIX,bbc.co.uk
+DOMAIN-SUFFIX,bb-static.com
+DOMAIN-SUFFIX,appsflyer.com
+DOMAIN-SUFFIX,massive-itv.com
+DOMAIN-SUFFIX,itv.com
+DOMAIN,itvpnp.stage.ott.irdeto.com
+DOMAIN,itvpnp.live.ott.irdeto.com
+DOMAIN,sdk.fra-01.braze.eu
