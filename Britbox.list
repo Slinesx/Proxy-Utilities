@@ -5,7 +5,7 @@ DOMAIN-SUFFIX,britbox.com
 DOMAIN-SUFFIX,britbox.co.uk
 DOMAIN-SUFFIX,bbc.co.uk
 DOMAIN-SUFFIX,bb-static.com
-DOMAIN-SUFFIX,appsflyer.com
+#DOMAIN-SUFFIX,appsflyer.com
 DOMAIN-SUFFIX,massive-itv.com
 DOMAIN-SUFFIX,itv.com
 DOMAIN,itvpnp.stage.ott.irdeto.com
