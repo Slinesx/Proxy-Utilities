@@ -101,7 +101,7 @@ function operator(proxies) {
         '🇨🇳': ['CN', 'CHN', 'BACK'],
     };
 	return proxies.map(p => {
-		let Flag = name.match(/[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/)?.[0] || '🏴‍☠️';
+		let Flag = p.name.match(/[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/)?.[0] || '🏴‍☠️';
 		if (Flag != '🏴‍☠️'){
 			const keywords = ISOFlags[Flag][1];
 			p.name = `${Flag} ${keywords}`;
