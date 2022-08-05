@@ -107,7 +107,7 @@ function operator(proxies) {
 			p.name = `${Flag} ${keywords}`;
 		        Flag = p.name.match(/[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/)?.[0] || '🏴‍☠️';
 		        if (Flag != '🏴‍☠️'){
-			        const keywords = ISOFlags[Flag][1];
+			        keywords = ISOFlags[Flag][1];
 			        p.name = `${Flag} ${keywords}`;
 		        }
                 }
