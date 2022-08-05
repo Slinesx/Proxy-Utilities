@@ -1,4 +1,7 @@
 function filter(proxies) {
         let index = parseInt(proxies.length/2)
-	return proxies.slice(0, index)
+        let count = 1
+	return proxies.map(p => {
+		return count++ < index;
+	})
 }
