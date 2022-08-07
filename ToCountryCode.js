@@ -102,12 +102,15 @@ function operator(proxies) {
         '🇿🇦': ['ZA', 'ZAF'],
         '🇨🇳': ['CN', 'CHN', 'BACK'],
     };
-	return proxies.map(p => {
+    const counter = {};
+        return proxies.map(p => {
 		let Flag = p.name.match(/[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/)?.[0] || '🏴‍☠️';
 		if (Flag != '🏴‍☠️'){
 			const keywords = ISOFlags[Flag][1];
 			p.name = `${Flag} ${keywords}`;
                 }
+                if (!counter[p.name]) counter[p.name] = 0;       
+                p.name = p.name + " " +(('000'+ ++counter[p.name]).slice(-2)).toString();
 		return p;
 	});
 }
