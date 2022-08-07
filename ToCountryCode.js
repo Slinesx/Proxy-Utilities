@@ -1,6 +1,6 @@
 function operator(proxies) {
 	const ISOFlags = {
-        '🏳️‍🌈': ['EXP', 'BAND'],
+        '🏴‍☠️': ['N/A', 'BAND'],
         '🇸🇱': ['TEST', 'SOS'],
         '🇦🇩': ['AD', 'AND'],
         '🇦🇪': ['AE', 'ARE'],
@@ -102,10 +102,10 @@ function operator(proxies) {
     };
 	return proxies.map(p => {
 		let Flag = p.name.match(/[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/)?.[0] || '🏴‍☠️';
-		if (Flag != '🏴‍☠️'){
+		//if (Flag != '🏴‍☠️'){
 			const keywords = ISOFlags[Flag][1];
 			p.name = `${Flag} ${keywords}`;
-                }
+                //}
 		return p;
 	});
 }
