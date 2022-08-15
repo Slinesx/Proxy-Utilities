@@ -67,7 +67,7 @@ function operator(proxies) {
         '🇲🇳': ['MN', 'MNG'],
         '🇲🇴': ['MO', 'MAC'],
         '🇲🇹': ['MT', 'MLT'],
-	    '🇲🇺': ['MU', 'MUS'],
+        '🇲🇺': ['MU', 'MUS'],
         '🇲🇽': ['MX', 'MEX'],
         '🇲🇾': ['MY', 'MYS'],
         '🇳🇱': ['NL', 'NLD'],
