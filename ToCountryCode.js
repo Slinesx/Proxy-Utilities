@@ -1,6 +1,6 @@
 function operator(proxies) {
 	const ISOFlags = {
-        '🏴‍☠️': ['N/A', 'BAND'],
+        '🏴‍☠️': ['N/A', 'N/A'],
         '🇸🇱': ['TEST', 'SOS'],
         '🇦🇩': ['AD', 'AND'],
         '🇦🇪': ['AE', 'ARE'],
@@ -65,8 +65,9 @@ function operator(proxies) {
         '🇳🇬': ['NG', 'NGA'],
         '🇲🇰': ['MK', 'MKD'],
         '🇲🇳': ['MN', 'MNG'],
-        '🇲🇴': ['MO', 'MAC', 'CTM'],
+        '🇲🇴': ['MO', 'MAC'],
         '🇲🇹': ['MT', 'MLT'],
+	'🇲🇺': ['MU', 'MUS']
         '🇲🇽': ['MX', 'MEX'],
         '🇲🇾': ['MY', 'MYS'],
         '🇳🇱': ['NL', 'NLD'],
@@ -93,14 +94,14 @@ function operator(proxies) {
         '🇹🇭': ['TH', 'THA'],
         '🇹🇳': ['TN', 'TUN'],
         '🇹🇷': ['TR', 'TUR'],
-        '🇹🇼': ['TW', 'TWN', 'CHT', 'HINET'],
+        '🇹🇼': ['TW', 'TWN'],
         '🇺🇦': ['UA', 'UKR'],
-        '🇺🇸': ['US', 'USA', 'LAX', 'SFO'],
+        '🇺🇸': ['US', 'USA'],
         '🇺🇾': ['UY', 'URY'],
         '🇻🇪': ['VE', 'VEN'],
         '🇻🇳': ['VN', 'VNM'],
         '🇿🇦': ['ZA', 'ZAF'],
-        '🇨🇳': ['CN', 'CHN', 'BACK'],
+        '🇨🇳': ['CN', 'CHN'],
     };
     const counter = {};
         return proxies.map(p => {
