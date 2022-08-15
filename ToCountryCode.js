@@ -103,15 +103,29 @@ function operator(proxies) {
         '🇿🇦': ['ZA', 'ZAF'],
         '🇨🇳': ['CN', 'CHN'],
     };
+    var pat=[]
+    pat[0] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","k","r","s","t","u","v","w","x","y","z"]
+    pat[1] = ["𝐀","𝐁","𝐂","𝐃","𝐄","𝐅","𝐆","𝐇","𝐈","𝐉","𝐊","𝐋","𝐌","𝐍","𝐎","𝐏","𝐊","𝐑","𝐒","𝐓","𝐔","𝐕","𝐖","𝐗","𝐘","𝐙"]
     const counter = {};
         return proxies.map(p => {
+		var mt = p.name.match(/^[0-9]*(\.)*[0-9]*(?=X)/)?.[0] || "1"
+		mt = parseFloat(mt)
+		let warn = ''
+		if (mt > 1){
+		    warn = ' ⚠️'
+		}
 		let Flag = p.name.match(/[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/)?.[0] || '🏴‍☠️';
 		if (Flag != '🏴‍☠️'){
-			const keywords = ISOFlags[Flag][1];
-			p.name = `${Flag} ${keywords}`;
+			let keywords = ISOFlags[Flag][1];
+			for (var i=0;i<26;i++) {
+        		    keywords = keywords.toLowerCase()
+        		    keywords = keywords.replace(new RegExp(pat[0][i], "gmi"),pat[1][i])
+      			}
+			p.name = `${Flag} |${keywords}`;
                 }
                 if (!counter[p.name]) counter[p.name] = 0;       
                 p.name = p.name + " " +(('000'+ ++counter[p.name]).slice(-2)).toString();
+		p.name = p.name + warn
 		return p;
 	});
 }
