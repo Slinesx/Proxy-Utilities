@@ -1,6 +1,6 @@
 function operator(proxies) {
 	const ISOFlags = {
-        '🏴‍☠️': ['N/A', 'N/A'],
+        '🏴‍☠️': ['N/A', 'NA'],
         '🇸🇱': ['TEST', 'SOS'],
         '🇦🇩': ['AD', 'AND'],
         '🇦🇪': ['AE', 'ARE'],
@@ -34,11 +34,11 @@ function operator(proxies) {
         '🇪🇸': ['ES', 'ESP'],
         '🇫🇮': ['FI', 'FIN'],
         '🇫🇷': ['FR', 'FRA'],
-        '🇬🇧': ['GB', 'GBR', 'UK'],
+        '🇬🇧': ['GB', 'GBR'],
         '🇬🇪': ['GE', 'GEO'],
         '🇬🇭': ['GH', 'GHA'],
         '🇬🇷': ['GR', 'GRC'],
-        '🇭🇰': ['HK', 'HKG', 'HKT', 'HKBN', 'HGC', 'WTT', 'CMI'],
+        '🇭🇰': ['HK', 'HKG'],
         '🇭🇷': ['HR', 'HRV'],
         '🇭🇺': ['HU', 'HUN'],
         '🇯🇴': ['JO', 'JOR'],
