@@ -26,6 +26,7 @@ function operator(proxies) {
         '🇨🇾': ['CY', 'CYP'],
         '🇨🇿': ['CZ', 'CZE'],
         '🇩🇪': ['DE', 'DEU'],
+        '🇩🇯': ['DJ', 'DJI']
         '🇩🇰': ['DK', 'DNK'],
         '🇩🇿': ['DZ', 'DZA'],
         '🇪🇨': ['EC', 'ECU'],
