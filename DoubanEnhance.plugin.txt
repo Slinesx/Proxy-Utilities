@@ -1,0 +1,11 @@
+#!name=豆瓣移动版网页增强
+#!desc=快捷跳转茶杯狐搜索，展示在映流媒体平台，快捷收藏电影至 Airtable
+#!author= Neurogram
+#!icon=
+
+
+[MITM]
+hostname= m.douban.com
+[Script]
+http-response ^https://m.douban.com/movie/subject/.+ requires-body=1,script-path= https://raw.githubusercontent.com/XUYinong/QLiafonx/main/Douban.js
+http-response ^https://m.douban.com/movie/subject/.+\?seen=\d requires-body=0,script-path= https://raw.githubusercontent.com/XUYinong/QLiafonx/main/Douban.js
