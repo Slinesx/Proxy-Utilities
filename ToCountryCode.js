@@ -120,6 +120,7 @@ function operator(proxies) {
         '🇺🇿': ['UZ', 'UZB'],
         '🇺🇸': ['US', 'USA'],
         '🇺🇾': ['UY', 'URY'],
+	'🇻🇦': ['VA', 'VAT'],
         '🇻🇪': ['VE', 'VEN'],
 	'🇻🇬': ['VG', 'VGB'],
         '🇻🇳': ['VN', 'VNM'],
