@@ -124,7 +124,7 @@ function operator(proxies) {
 	'🇻🇬': ['VG', 'VGB'],
         '🇻🇳': ['VN', 'VNM'],
         '🇿🇦': ['ZA', 'ZAF'],
-        '🇨🇳': ['CN', 'CHN'],
+        //'🇨🇳': ['CN', 'CHN'],
     };
     const counter = {};
         return proxies.map(p => {
