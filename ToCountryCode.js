@@ -48,6 +48,7 @@ function operator(proxies) {
 	'🇬🇱': ['GL', 'GRL'],
         '🇬🇷': ['GR', 'GRC'],
 	'🇬🇹': ['GT', 'GTM'],
+	'🇬🇺': ['GU', 'GUM'],
         '🇭🇰': ['HK', 'HKG'],
         '🇭🇷': ['HR', 'HRV'],
         '🇭🇺': ['HU', 'HUN'],
