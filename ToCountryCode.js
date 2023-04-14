@@ -115,7 +115,7 @@ function operator(proxies) {
         '🇹🇭': ['TH', 'THA'],
         '🇹🇳': ['TN', 'TUN'],
         '🇹🇷': ['TR', 'TUR'],
-        //'🇹🇼': ['TW', 'TWN'],
+        '🇹🇼': ['TW', 'TWN'],
 	'🇨🇳': ['TW', 'TWN'],
         '🇺🇦': ['UA', 'UKR'],
         '🇺🇿': ['UZ', 'UZB'],
