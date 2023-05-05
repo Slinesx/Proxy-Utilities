@@ -6,6 +6,7 @@ function operator(proxies) {
         '🇦🇱': ['AL', 'ALB'],
         '🇦🇲': ['AM', 'ARM'],
 	'🇦🇴': ['AO', 'AGO'],
+        '🇦🇶': ['AQ', 'ATA'],
         '🇦🇷': ['AR', 'ARG'],
         '🇦🇹': ['AT', 'AUT'],
         '🇦🇺': ['AU', 'AUS'],
