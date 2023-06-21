@@ -114,6 +114,7 @@ function operator(proxies) {
         '🇷🇪': ['RE', 'REU'],
         '🇷🇺': ['RU', 'RUS'],
         '🇸🇦': ['SA', 'SAU'],
+	'🇸🇨': ['SC', 'SYC'],
         '🇸🇪': ['SE', 'SWE'],
         '🇸🇬': ['SG', 'SGP'],
         '🇸🇮': ['SI', 'SVN'],
