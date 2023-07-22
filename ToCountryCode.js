@@ -134,6 +134,7 @@ function operator(proxies) {
         '🇻🇪': ['VE', 'VEN'],
 	'🇻🇬': ['VG', 'VGB'],
         '🇻🇳': ['VN', 'VNM'],
+	'🇾🇪': ['YE', 'YEM'],
         '🇿🇦': ['ZA', 'ZAF'],
         //'🇨🇳': ['CN', 'CHN'],
     };
