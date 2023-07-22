@@ -66,6 +66,7 @@ function operator(proxies) {
         '🇮🇸': ['IS', 'ISL'],
 	'🇮🇹': ['IT', 'ITA'],
 	'🇯🇪': ['JE', 'JEY'],
+	'🇯🇲': ['JM', 'JAM'],
         '🇯🇴': ['JO', 'JOR'],
         '🇯🇵': ['JP', 'JPN'],
         '🇰🇪': ['KE', 'KEN'],
