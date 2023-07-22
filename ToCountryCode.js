@@ -45,7 +45,7 @@ function operator(proxies) {
 	'🇨🇰': ['CK', 'COK'],
 	'🇨🇱': ['CL', 'CHL'],
 	'🇨🇲': ['CM', 'CMR'],
-	'🇨🇳': ['CN', 'CHN'],
+	'🇨🇳': ['TW', 'TWN'],
 	'🇨🇴': ['CO', 'COL'],
 	'🇨🇷': ['CR', 'CRI'],
 	'🇨🇺': ['CU', 'CUB'],
