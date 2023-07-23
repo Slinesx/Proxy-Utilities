@@ -261,7 +261,7 @@ function operator(proxies) {
 		}
 		let Flag = p.name.match(/[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/)?.[0] || '🏴‍☠️';
 		if (Flag != '🏴‍☠️'){
-			let keywords = ISOFlags[Flag][0];
+			let keywords = ISOFlags[Flag][1];
 			p.name = `${Flag} ${keywords}•|`;
                 }
                 if (!counter[p.name]) counter[p.name] = 0;       
