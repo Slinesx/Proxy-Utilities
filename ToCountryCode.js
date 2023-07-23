@@ -264,14 +264,6 @@ function operator(proxies) {
 			let keywords = ISOFlags[Flag][0];
 			p.name = `${Flag} ${keywords}•|`;
                 }
-		p.name = [...p.name].map(c => {
-	            if (/[a-zA-Z0-9]/.test(c)) {
-	                const code = c.charCodeAt(0);
-	                const index = INDEX[code];
-	                return TABLE[index];
-	            }
-	            return c;
-	        }).join("");
                 if (!counter[p.name]) counter[p.name] = 0;       
                 p.name = p.name + " " +(('000'+ ++counter[p.name]).slice(-2)).toString();
 		p.name = p.name + warn
