@@ -1,5 +1,7 @@
-# AMC+
- 
-DOMAIN-SUFFIX, amcn.com
+# > AMC+
+DOMAIN-SUFFIX amcn.com
 DOMAIN-SUFFIX, amcplus.com
+DOMAIN-SUFFIX boltdns.net
+DOMAIN-SUFFIX akamaized.net
 DOMAIN-KEYWORD, amcplus
+#DOMAIN-SUFFIX brightcove.com
