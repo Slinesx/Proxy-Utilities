@@ -251,23 +251,23 @@ function operator(proxies) {
     };
     const counter = {};
         return proxies.map(p => {
-			var mt = p.name.match(/[0-9]*(\.)*[0-9]*(?=X)/)?.[0] || "1"
-			mt = parseFloat(mt)
-			let warn = ''
-			if (mt > 1){
-				warn = '  🔸'
-			} else if (mt <= 0.5) {
-				warn = '  🔹'
-			}
-			let name = p.name.match(/[\u4E00-\u9FA5]+/)?.[0];
-			if (name in ZHFlags){
-				let keywords = ZHFlags[name][1];
-				let flag = ZHFlags[name][0];
-				p.name = `${flag} ${keywords}•|`;
-		    }
-		    if (!counter[p.name]) counter[p.name] = 0;       
-		    p.name = p.name + " " +(('000'+ ++counter[p.name]).slice(-2)).toString();
-			p.name = p.name + warn
-			return p;
-		});	
+		var mt = p.name.match(/[0-9]*(\.)*[0-9]*(?=X)/)?.[0] || "1"
+		mt = parseFloat(mt)
+		let warn = ''
+		if (mt > 1){
+		    warn = '  🔸'
+		} else if (mt <= 0.5) {
+		    warn = '  🔹'
+		}
+		let name = p.name.match(/[\u4E00-\u9FA5]+/)?.[0];
+		if (name in ZHFlags){
+			let keywords = ZHFlags[name][1];
+      let flag = ZHFlags[name][0];
+			p.name = `${flag} ${keywords}•|`;
+    }
+    if (!counter[p.name]) counter[p.name] = 0;       
+    p.name = p.name + " " +(('000'+ ++counter[p.name]).slice(-2)).toString();
+		p.name = p.name + warn
+		return p;
+	});
 }
