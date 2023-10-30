@@ -268,7 +268,7 @@ function operator(proxies) {
 	        	if (result != null){
 		                let keywords = ZHFlags[result][1];
 		                let flag = ZHFlags[result][0];
-		                p.name = `${flag} ${keywords}•| &&`;
+		                p.name = `${flag} ${keywords}•|`;
 	           	}
 		}
     		if (!counter[p.name]) counter[p.name] = 0;       
