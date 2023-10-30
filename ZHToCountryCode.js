@@ -262,12 +262,58 @@ function operator(proxies) {
 		let name = p.name.match(/[\u4E00-\u9FA5]+/)?.[0];
 		if (name in ZHFlags){
 			let keywords = ZHFlags[name][1];
-      let flag = ZHFlags[name][0];
+      			let flag = ZHFlags[name][0];
 			p.name = `${flag} ${keywords}•|`;
-    }
-    if (!counter[p.name]) counter[p.name] = 0;       
-    p.name = p.name + " " +(('000'+ ++counter[p.name]).slice(-2)).toString();
+    		} else {
+			const result = fuzzyMatches(ZHFlags, name, maxEditDistance);
+	        	if (result != null){
+		                let keywords = ZHFlags[result][1];
+		                let flag = ZHFlags[result][0];
+		                p.name = `${flag} ${keywords}•|`;
+	           	}
+		}
+    		if (!counter[p.name]) counter[p.name] = 0;       
+    		p.name = p.name + " " +(('000'+ ++counter[p.name]).slice(-2)).toString();
 		p.name = p.name + warn
 		return p;
 	});
+}
+
+function cal_Distance(str1, str2) {
+  const m = str1.length;
+  const n = str2.length;
+  const dp = [];
+
+  for (let i = 0; i <= m; i++) {
+    dp[i] = [i];
+  }
+
+  for (let j = 0; j <= n; j++) {
+    dp[0][j] = j;
+  }
+
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      const cost = str1[i - 1] !== str2[j - 1] ? 1 : 0;
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + cost
+      );
+    }
+  }
+
+  return dp[m][n];
+}
+
+function fuzzyMatches(dictionary, stringToMatch, maxEditDistance) {
+  let key = null;
+  for (const key in dictionary) {
+      const distance = cal_Distance(stringToMatch, key);
+      if (distance <= maxEditDistance) {
+        if_find = key;
+	break;
+      }
+  }
+  return if_find;
 }
