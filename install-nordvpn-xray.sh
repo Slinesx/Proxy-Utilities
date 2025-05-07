@@ -1,42 +1,35 @@
 #!/usr/bin/env bash
-# install-nordvpn-xray.sh — online installer & launcher for nordvpn-xray container
+# install-nordvpn-xray.sh — online installer & launcher for nordvpn‑xray container
 set -Eeuo pipefail
 
-# 0) ensure Docker + curl exist
+# 0) prerequisites
 command -v docker >/dev/null 2>&1 || { echo "❌ Install Docker first" >&2; exit 1; }
 command -v curl   >/dev/null 2>&1 || { echo "❌ Install curl first" >&2;   exit 1; }
 
-# 1) creds
+# 1) credentials
 : "${NORD_USERNAME:?ERROR: export NORD_USERNAME}"
 : "${NORD_PASSWORD:?ERROR: export NORD_PASSWORD}"
 
-# 2) cache‑bust timestamp for downstream fetches
-TS=$(date +%s)
-
-# 3) URLs for emoji utilities (with ?nocache to bust CDN caches)
-EMOJI_DATA_URL="https://raw.githubusercontent.com/Slinesx/Proxy-Utilities/main/emoji_data.sh?nocache=${TS}"
-EMOJI_UTILS_URL="https://raw.githubusercontent.com/Slinesx/Proxy-Utilities/main/emoji_utils.sh?nocache=${TS}"
-
-# 4) temp files
-EMOJI_DATA_TMP=$(mktemp /tmp/emoji_data.XXXXXX.sh)
-EMOJI_UTILS_TMP=$(mktemp /tmp/emoji_utils.XXXXXX.sh)
-OVPN_TMP=""
-
-# 5) cleanup on EXIT
-cleanup() {
-  [[ -n "$EMOJI_DATA_TMP"   && -f "$EMOJI_DATA_TMP"  ]] && rm -f "$EMOJI_DATA_TMP"
-  [[ -n "$EMOJI_UTILS_TMP"  && -f "$EMOJI_UTILS_TMP" ]] && rm -f "$EMOJI_UTILS_TMP"
-  [[ -n "$OVPN_TMP"         && -f "$OVPN_TMP"        ]] && rm -f "$OVPN_TMP"
-}
+# 2) temp workspace
+TMPDIR="$(mktemp -d)"
+cleanup(){ rm -rf "$TMPDIR"; }
 trap cleanup EXIT
 
-# 6) grab emoji_data & emoji_utils
-curl -H 'Cache-Control: no-cache, no-store' -fsSL "$EMOJI_DATA_URL"  -o "$EMOJI_DATA_TMP"
-curl -H 'Cache-Control: no-cache, no-store' -fsSL "$EMOJI_UTILS_URL" -o "$EMOJI_UTILS_TMP"
-source "$EMOJI_DATA_TMP"
-source "$EMOJI_UTILS_TMP"
+# 3) cache‑bust timestamp
+TS="$(date +%s)"
 
-# 7) server code from arg or prompt
+# 4) download emoji_data.sh & emoji_utils.sh into TMPDIR
+EMOJI_DATA_URL="https://raw.githubusercontent.com/Slinesx/Proxy-Utilities/main/emoji_data.sh?ts=${TS}"
+EMOJI_UTILS_URL="https://raw.githubusercontent.com/Slinesx/Proxy-Utilities/main/emoji_utils.sh?ts=${TS}"
+
+echo "→ Fetching emoji mappings…"
+curl -H 'Cache-Control: no-cache, no-store' -fsSL "$EMOJI_DATA_URL"  -o "$TMPDIR/emoji_data.sh"
+curl -H 'Cache-Control: no-cache, no-store' -fsSL "$EMOJI_UTILS_URL" -o "$TMPDIR/emoji_utils.sh"
+
+# 5) source them (emoji_utils.sh will source emoji_data.sh via dirname)
+source "$TMPDIR/emoji_utils.sh"
+
+# 6) server code from arg or prompt
 if [[ $# -ge 1 ]]; then
   srv="$1"
 else
@@ -44,28 +37,29 @@ else
 fi
 [[ -n "$srv" ]] || { echo "❌ No server code provided" >&2; exit 1; }
 
-# 8) download the .ovpn
+# 7) download the .ovpn
 OVPN_URL="https://downloads.nordcdn.com/configs/files/ovpn_udp/servers/${srv}.nordvpn.com.udp.ovpn"
-OVPN_TMP=$(mktemp /tmp/${srv}.nordvpn.XXXXXX.ovpn)
+OVPN_TMP="$TMPDIR/${srv}.nordvpn.ovpn"
 echo "→ Downloading OpenVPN config for: $srv"
 curl -fsSL "$OVPN_URL" -o "$OVPN_TMP"
 
-# 9) tag + Shadowsocks password
+# 8) generate tag & Shadowsocks password
 generate_tag "$srv"
 SS_PASSWORD="${SS_PASSWORD:-$(openssl rand -base64 16)}"
 
-# 10) pick a free host port
+# 9) pick a free host port
 while :; do
   PORT=$(shuf -i20000-65000 -n1)
   ss -tln | awk '{print $4}' | grep -q ":${PORT}$" || break
 done
 
-# 11) pull & run
+# 10) pull & run the container
 echo "→ Pulling latest liafonx/nordvpn-xray:latest"
 docker pull liafonx/nordvpn-xray:latest
 
 container="nordxray-${srv}"
 docker rm -f "$container" &>/dev/null || true
+
 docker run -d --name "$container" \
   --pull=always \
   --cap-add=NET_ADMIN --device=/dev/net/tun \
@@ -80,7 +74,7 @@ docker run -d --name "$container" \
   -v "$OVPN_TMP":/nordvpn.ovpn:ro \
   liafonx/nordvpn-xray:latest
 
-# 12) verify
+# 11) verify
 sleep 2
 if [[ "$(docker inspect -f '{{.State.Running}}' "$container")" != "true" ]]; then
   echo "❌ Container failed to start — logs:" >&2
@@ -88,7 +82,7 @@ if [[ "$(docker inspect -f '{{.State.Running}}' "$container")" != "true" ]]; the
   exit 1
 fi
 
-# 13) output
+# 12) output
 HOST_IP=$(hostname -I | awk '{print $1}')
 cat <<EOF
 -----------------------------------------------------------------
