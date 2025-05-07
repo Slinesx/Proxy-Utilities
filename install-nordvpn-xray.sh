@@ -2,23 +2,23 @@
 # install-nordvpn-xray.sh — online installer & launcher for nordvpn‑xray container
 set -Eeuo pipefail
 
-# 0) ensure Docker + curl are installed
+# 0) prerequisites
 command -v docker >/dev/null 2>&1 || { echo "❌ Install Docker first" >&2; exit 1; }
 command -v curl   >/dev/null 2>&1 || { echo "❌ Install curl first" >&2;   exit 1; }
 
-# 1) require NordVPN credentials
+# 1) credentials
 : "${NORD_USERNAME:?ERROR: export NORD_USERNAME}"
 : "${NORD_PASSWORD:?ERROR: export NORD_PASSWORD}"
 
-# 2) create a temp workspace (and ensure it’s removed on exit)
-TMPDIR="$(mktemp -d)"
-cleanup() { rm -rf "$TMPDIR"; }
-trap cleanup EXIT
-
-# 3) cache‑bust timestamp
+# 2) cache‑bust timestamp
 TS="$(date +%s)"
 
-# 4) download emoji_data.sh and emoji_utils.sh into TMPDIR
+# 3) make a temp workspace
+TMPDIR="$(mktemp -d)"
+cleanup(){ rm -rf "$TMPDIR"; }
+trap cleanup EXIT
+
+# 4) download emoji mapping scripts into TMPDIR
 echo "→ Fetching emoji mappings…"
 curl -H 'Cache-Control: no-cache, no-store' -fsSL \
   "https://raw.githubusercontent.com/Slinesx/Proxy-Utilities/main/emoji_data.sh?ts=${TS}" \
@@ -27,10 +27,10 @@ curl -H 'Cache-Control: no-cache, no-store' -fsSL \
   "https://raw.githubusercontent.com/Slinesx/Proxy-Utilities/main/emoji_utils.sh?ts=${TS}" \
   -o "$TMPDIR/emoji_utils.sh"
 
-# 5) source the utils (which will source data from same dir)
+# 5) source the utils
 source "$TMPDIR/emoji_utils.sh"
 
-# 6) determine the NordVPN server code
+# 6) server code from arg or prompt
 if [[ $# -ge 1 ]]; then
   srv="$1"
 else
@@ -38,17 +38,17 @@ else
 fi
 [[ -n "$srv" ]] || { echo "❌ No server code provided" >&2; exit 1; }
 
-# 7) download the matching .ovpn
-echo "→ Downloading OpenVPN config for: $srv"
+# 7) download the .ovpn into TMPDIR
 OVPN_URL="https://downloads.nordcdn.com/configs/files/ovpn_udp/servers/${srv}.nordvpn.com.udp.ovpn"
-OVPN_TMP="$TMPDIR/${srv}.ovpn"
+OVPN_TMP="$TMPDIR/${srv}.nordvpn.ovpn"
+echo "→ Downloading OpenVPN config for: $srv"
 curl -fsSL "$OVPN_URL" -o "$OVPN_TMP"
 
 # 8) generate tag & Shadowsocks password
 generate_tag "$srv"
 SS_PASSWORD="${SS_PASSWORD:-$(openssl rand -base64 16)}"
 
-# 9) pick a random free host port
+# 9) pick a free host port
 while :; do
   PORT=$(shuf -i20000-65000 -n1)
   ss -tln | awk '{print $4}' | grep -q ":${PORT}$" || break
@@ -74,7 +74,7 @@ docker run -d --name "$container" \
   -v "$OVPN_TMP":/nordvpn.ovpn:ro \
   liafonx/nordvpn-xray:latest
 
-# 11) verify the container is running
+# 11) verify
 sleep 2
 if [[ "$(docker inspect -f '{{.State.Running}}' "$container")" != "true" ]]; then
   echo "❌ Container failed to start — logs:" >&2
@@ -82,7 +82,7 @@ if [[ "$(docker inspect -f '{{.State.Running}}' "$container")" != "true" ]]; the
   exit 1
 fi
 
-# 12) print final info
+# 12) final output
 HOST_IP=$(hostname -I | awk '{print $1}')
 cat <<EOF
 -----------------------------------------------------------------
