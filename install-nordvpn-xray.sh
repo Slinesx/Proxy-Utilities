@@ -13,9 +13,9 @@ EMOJI_UTILS_TMP=""
 
 # cleanup all temp files on exit or error
 cleanup() {
-  [[ -n "$OVPN_TMP"      && -f "$OVPN_TMP"      ]] && rm -f "$OVPN_TMP"
-  [[ -n "$EMOJI_DATA_TMP" && -f "$EMOJI_DATA_TMP" ]] && rm -f "$EMOJI_DATA_TMP"
-  [[ -n "$EMOJI_UTILS_TMP"&& -f "$EMOJI_UTILS_TMP"]] && rm -f "$EMOJI_UTILS_TMP"
+  [[ -n "$OVPN_TMP" ]] && [[ -f "$OVPN_TMP" ]] && rm -f "$OVPN_TMP"
+  [[ -n "$EMOJI_DATA_TMP" ]] && [[ -f "$EMOJI_DATA_TMP" ]] && rm -f "$EMOJI_DATA_TMP"
+  [[ -n "$EMOJI_UTILS_TMP" ]] && [[ -f "$EMOJI_UTILS_TMP" ]] && rm -f "$EMOJI_UTILS_TMP"
 }
 trap cleanup EXIT
 
